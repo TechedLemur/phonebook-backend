@@ -2,6 +2,8 @@ const { request, response } = require("express");
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+
 let persons = [
   {
     name: "Arto Hellas",
@@ -49,6 +51,42 @@ app.get("/api/persons/:id", (request, response) => {
   } else {
     response.status(404).end();
   }
+});
+
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  persons = persons.filter((person) => person.id !== id);
+
+  response.status(204).end();
+});
+
+app.post("/api/persons", (request, response) => {
+  const person = request.body;
+  console.log(person);
+
+  if (!person.name)
+    return response.status(400).json({
+      error: "Name is missing",
+    });
+
+  if (!person.number)
+    return response.status(400).json({
+      error: "Number is missing",
+    });
+
+  if (persons.map((p) => p.name).includes(person.name))
+    return response.status(400).json({
+      error: "A person with this name is already registered",
+    });
+
+  if (persons.map((p) => p.number).includes(person.number))
+    return response.status(400).json({
+      error: "A person with this number is already registered",
+    });
+
+  person.id = Math.floor(Math.random() * 3000);
+  persons = persons.concat(person);
+  response.json(person);
 });
 
 const PORT = 3001;
