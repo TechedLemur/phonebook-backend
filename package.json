@@ -1,0 +1,27 @@
+{
+  "name": "phonebook-backend",
+  "version": "1.0.0",
+  "description": "Repository for the backend server in part 3 of [Fullstackopen](https://fullstackopen.com/en/part3) course.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechedLemur/phonebook-backend.git"
+  },
+  "author": "Jostein Tysse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TechedLemur/phonebook-backend/issues"
+  },
+  "homepage": "https://github.com/TechedLemur/phonebook-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
