@@ -91,19 +91,14 @@ app.post("/api/persons", (request, response) => {
       error: "Number is missing",
     });
 
-  if (persons.map((p) => p.name).includes(person.name))
-    return response.status(400).json({
-      error: "A person with this name is already registered",
-    });
+    const _person = new Person({
+      name: person.name,
+      number: person.number,
+  })
 
-  if (persons.map((p) => p.number).includes(person.number))
-    return response.status(400).json({
-      error: "A person with this number is already registered",
-    });
-
-  person.id = Math.floor(Math.random() * 3000);
-  persons = persons.concat(person);
-  response.json(person);
+  _person.save().then(savedPerson => {
+    response.json(savedPerson);
+  })
 });
 
 const PORT = process.env.PORT || 3001;
